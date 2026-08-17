@@ -41,7 +41,7 @@
   --maxw:760px;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:96px}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:142px}
 body{
   margin:0;
   background:var(--cream);
@@ -114,6 +114,7 @@ a:hover{border-bottom-color:var(--sinopia)}
 }
 .pill:hover{border-color:var(--gold);color:var(--ink)}
 .pill.on{background:var(--medici);border-color:var(--medici);color:var(--gold-lt)}
+.pill.muted{opacity:.32}
 
 /* ---------- SECTION FURNITURE ---------- */
 section{padding:44px 0 6px}
@@ -136,7 +137,7 @@ p{margin:0 0 15px}
 .band.tight{margin:26px 0 34px}
 
 /* ---------- DAY ---------- */
-.day{margin:0 0 8px;scroll-margin-top:88px}
+.day{margin:0 0 8px;scroll-margin-top:132px}
 .day-head{
   position:relative;border-radius:6px;overflow:hidden;margin-bottom:26px;
   background:var(--medici);color:var(--parchment);box-shadow:var(--shadow);
@@ -345,6 +346,38 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
 .altblk h4{font-family:var(--caps);font-weight:600;font-size:18px;margin:0 0 6px;line-height:1.28;letter-spacing:.01em}
 .altblk p{font-size:17.5px;margin:0 0 10px;color:#3D3126}
 
+/* ── ACTIVITY FILTER ───────────────────────────────────── */
+.filter-inner{
+  display:flex;align-items:center;gap:1px;overflow-x:auto;
+  padding:7px 14px 8px;margin-top:1px;
+  border-top:1px solid rgba(42,32,25,.09);
+  scrollbar-width:none;-ms-overflow-style:none;
+}
+.filter-inner::-webkit-scrollbar{display:none}
+.flabel{
+  flex:0 0 auto;font-family:var(--ui);font-size:9px;font-weight:600;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--ink-soft);opacity:.5;margin-right:9px;
+}
+.fchip{
+  flex:0 0 auto;appearance:none;background:none;border:0;border-bottom:1.5px solid transparent;
+  cursor:pointer;font-family:var(--ui);font-size:11px;font-weight:500;letter-spacing:.05em;
+  color:var(--ink-soft);padding:4px 8px 3px;border-radius:3px 3px 0 0;
+  transition:color .15s,background .15s,border-color .15s;white-space:nowrap;
+}
+.fchip:hover{color:var(--ink)}
+.fchip.on{color:var(--sinopia);border-bottom-color:var(--gold);background:rgba(190,149,64,.11)}
+.fchip:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+.fcount{display:none}
+.flabel.counting{color:var(--sinopia);opacity:.8;letter-spacing:.12em}
+.is-hidden{display:none !important}
+.emptyday{
+  font-family:var(--ui);font-size:12.5px;font-style:italic;letter-spacing:.02em;
+  color:var(--ink-soft);opacity:.55;padding:2px 0 14px;
+}
+html{scroll-padding-top:142px}
+.day{scroll-margin-top:132px}
+@media print{.filter-inner{display:none}}
+
 /* ── PHOTOGRAPHY ───────────────────────────────── */
 .hero{position:relative;overflow:hidden;background:var(--medici)}
 .hero-photo{
@@ -447,6 +480,9 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
     <a class="pill" href="#eat">Eat</a>
     <a class="pill" href="#prac">Practical</a>
   </div>
+  <div class="filter-inner" role="group" aria-label="Filter the plan by kind of activity">
+    <span class="flabel">Show</span><button class="fchip on" data-f="all" type="button" aria-pressed="true">Everything</button><button class="fchip" data-f="fixed" type="button" aria-pressed="false">Fixed</button><button class="fchip" data-f="work" type="button" aria-pressed="false">Work</button><button class="fchip" data-f="sights" type="button" aria-pressed="false">Sights</button><button class="fchip" data-f="outdoors" type="button" aria-pressed="false">Outdoors</button><button class="fchip" data-f="meals" type="button" aria-pressed="false">Meals</button><button class="fchip" data-f="gelato" type="button" aria-pressed="false">Gelato</button><button class="fchip" data-f="travel" type="button" aria-pressed="false">Travel</button><span class="fcount" aria-live="polite"></span>
+  </div>
 </nav>
 
 <!-- ══════════════════════ ORIENTATION ══════════════════════ -->
@@ -501,7 +537,7 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
     <p class="photocap">The Ponte Vecchio from upriver. Your stretch of the lungarno is just out of frame on the left bank.</p>
 
     <div class="tl">
-      <div class="ev key">
+      <div class="ev key" data-cat="travel fixed">
         <span class="time">12:00</span>
         <h4>Touchdown at Firenze Peretola</h4>
         <p>Your Amsterdam flight lands at noon. <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Aeroporto+di+Firenze+Peretola" target="_blank" rel="noopener noreferrer">Florence's airport</a> is charmingly small — one terminal, and you'll be standing outside in about 20 minutes.</p>
@@ -510,20 +546,20 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         <div class="tags"><span class="tag t-move">Taxi ~€25</span><span class="tag t-cost">20 min</span></div>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="rest">
         <span class="time">13:15</span>
         <h4>Drop the bags — and whatever you do, don't lie down</h4>
         <p>This is the moment jet lag wins or loses. A 40-minute nap you can survive. Ninety minutes and you'll be wide awake at 3:00 a.m. staring at the ceiling, and you'll spend the rest of the week catching up. Shower, change into something loose, and get back out that door.</p>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="meals">
         <span class="time">14:15</span>
         <h4>Your first plate in Italy</h4>
         <p>Keep it simple. <b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Buca+dell%27Orafo+Volta+dei+Girolami+Firenze" target="_blank" rel="noopener noreferrer">Buca dell'Orafo</a></b>, down the steps under the archway on Volta dei Girolami, is two minutes away and has been feeding this neighborhood since 1945. Or grab a panino and a glass of wine standing up at <b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ino+Via+dei+Georgofili+Firenze" target="_blank" rel="noopener noreferrer">'Ino</a></b> on Via dei Georgofili. Order whatever you've been daydreaming about since Detroit.</p>
         <div class="tags"><span class="tag t-walk">2-min walk</span></div>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="sights">
         <span class="time">15:30</span>
         <h4>Three doorways, ten minutes apart <span class="rate">▲▲</span></h4>
         <p>A gentle, mostly-shaded loop designed to keep your eyes open. Start at <b>Santa Trinita</b> for the Sassetti Chapel. Walk two minutes to <b>Santi Apostoli</b> on its sunken little square. Then head up to the <b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Officina+Profumo+Farmaceutica+di+Santa+Maria+Novella+Firenze" target="_blank" rel="noopener noreferrer">Officina Profumo-Farmaceutica di Santa Maria Novella</a></b>.</p>
@@ -532,7 +568,7 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         <div class="tags"><span class="tag t-free">Free</span><span class="tag t-walk">Walking loop</span></div>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="sights">
         <span class="time">17:00</span>
         <h4>Michelangelo's Secret Room <span class="rate">▲▲▲</span></h4>
         <p>Beneath the New Sacristy at the Medici Chapels there's a low, windowless coal cellar. In 1975 a curator lifted a trapdoor, climbed down, and found the walls covered in charcoal drawings — a torso, a Laocoön, a horse, legs — attributed to Michelangelo himself.</p>
@@ -542,7 +578,7 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         <div class="tags"><span class="tag t-book">Book months ahead</span><span class="tag t-cost">€35 pp</span><span class="tag t-walk">12-min walk</span></div>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="sights">
         <span class="time">17:30</span>
         <h4>Stay for the New Sacristy <span class="rate">▲▲▲</span></h4>
         <p>Your ticket covers it and you're standing in it, so linger. These are Michelangelo's Medici tombs, with four reclining figures — <em>Dawn</em> and <em>Dusk</em>, <em>Night</em> and <em>Day</em> — that look less carved than poured. Notice how uncomfortable they all are. Not one of them is at rest.</p>
@@ -550,7 +586,7 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         <div class="quote">"Sweet is sleep, and sweeter to be stone, while the harm and the shame endure. Not to see, not to feel, is my good fortune. So do not wake me — speak softly."<span>Michelangelo, replying in verse to a poem written in praise of his <em>Night</em></span></div>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="meals">
         <span class="time">18:45</span>
         <h4>Aperitivo with an altitude advantage</h4>
         <p><b>La Terrazza</b> at the Hotel Continentale is a small rooftop that is, for all practical purposes, attached to your building. The Ponte Vecchio sits directly below you and the Arno runs west straight into the sunset. Order a Negroni — invented in this city, when a Count Negroni asked for something stronger in his Americano — and don't plan anything else.</p>
@@ -564,20 +600,20 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         <div class="tags"><span class="tag t-cost">€€</span><span class="tag t-walk">90 seconds</span></div>
       </div>
 
-      <div class="ev soft">
+      <div class="ev soft" data-cat="outdoors">
         <span class="time">19:46</span>
         <h4>Sunset</h4>
         <p>From up here the light slides down the river past the Santa Trinita and Carraia bridges. This is the shot everyone tries to take from street level and gets, properly, from above.</p>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="meals">
         <span class="time">20:30</span>
         <h4>Dinner close to the pillow</h4>
         <p><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Trattoria+Cammillo+Borgo+San+Jacopo+Firenze" target="_blank" rel="noopener noreferrer">Trattoria Cammillo</a></b> (Borgo San Jacopo 57r) is five minutes over the bridge, family-run since 1945, with a long menu and waiters who will gently overrule your choices. That's a feature, not a bug. Or simply stay north of the river at <b>Buca dell'Orafo</b>. Reserve either one.</p>
         <div class="tags"><span class="tag t-book">Reserve</span><span class="tag t-cost">€€–€€€</span></div>
       </div>
 
-      <div class="ev soft">
+      <div class="ev soft" data-cat="rest">
         <span class="time">22:00</span>
         <h4>Lights out</h4>
         <p>Set the alarm for 6:10. Tomorrow morning is the reason.</p>
@@ -611,7 +647,7 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
     <p class="photocap">Piazzale Michelangelo at dusk — count the heads along the parapet. San Miniato sits above and behind all of it.</p>
 
     <div class="tl">
-      <div class="ev key">
+      <div class="ev key" data-cat="outdoors">
         <span class="time">06:20</span>
         <h4>The five minutes that pay for the whole trip <span class="rate">▲▲▲</span></h4>
         <p>Set the alarm and do this. Step out your door, turn left along the river. The Ponte Vecchio — a bridge that has carried people since 1345 and shopkeepers since long before that — will have nobody on it. Not a soul. The sun comes up behind the Uffizi at 6:40 and touches the shop shutters on the bridge before it reaches the street.</p>
@@ -619,38 +655,38 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         <div class="tags"><span class="tag t-free">Free</span><span class="tag t-walk">Out your front door</span></div>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="meals">
         <span class="time">07:30</span>
         <h4>Coffee, two ways</h4>
         <p>Modern: <b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ditta+Artigianale+Via+dei+Neri+Firenze" target="_blank" rel="noopener noreferrer">Ditta Artigianale</a></b> (Via dei Neri 32r), Florence's contribution to the specialty-coffee movement, six minutes away, with actual breakfast. Traditional: <b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Caffe+Gilli+Piazza+della+Repubblica+Firenze" target="_blank" rel="noopener noreferrer">Caffè Gilli</a></b> in Piazza della Repubblica, going since 1733 — stand at the marble bar, espresso and a bomboloni, out the door in four minutes and a couple of euros lighter.</p>
         <div class="info"><b>Bar etiquette:</b> Standing at the bar costs a fraction of sitting at a table — sometimes a third. Order and pay at the register first, then take your receipt to the barista. Do it the local way and you'll feel like a regular by Friday.</div>
       </div>
 
-      <div class="ev soft">
+      <div class="ev soft" data-cat="work">
         <span class="time">09:00</span>
         <h4>Load in</h4>
         <p>If the location is still up in the air, see the <a href="#shoot">shoot shortlist</a> below. One quick note from a guy who's filmed a lot of Italy: at 10:30 in September the sun is already high and unforgiving. Shade, north light, or an east-facing wall will do more for you than any location on a postcard.</p>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="work fixed">
         <span class="time">10:30 – 13:00</span>
         <h4>The interview</h4>
         <p>Marco &amp; Tiina Geraci. Wrapped and packed by 13:00.</p>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="meals">
         <span class="time">13:15</span>
         <h4>Lunch wherever you land</h4>
         <p>Near Santa Croce, head for the <b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Mercato+di+Sant%27Ambrogio+Firenze" target="_blank" rel="noopener noreferrer">Mercato di Sant'Ambrogio</a></b> — this is where Florentines actually shop, not where tour groups get herded — or <b>Trattoria Cibrèo</b> on Via dei Macci. Near the Duomo, keep walking five more minutes to <b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Osteria+Vini+e+Vecchi+Sapori+Firenze" target="_blank" rel="noopener noreferrer">Osteria Vini e Vecchi Sapori</a></b> on Via dei Magazzini. In the Oltrarno, <b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Il+Magazzino+Piazza+della+Passera+Firenze" target="_blank" rel="noopener noreferrer">Il Magazzino</a></b> on Piazza della Passera does tripe as serious cooking rather than as a dare.</p>
       </div>
 
-      <div class="ev soft">
+      <div class="ev soft" data-cat="rest">
         <span class="time">15:00</span>
         <h4>Back to base and horizontal</h4>
         <p>Offload cards, charge batteries, sleep an hour. The middle of a Florentine afternoon is dead air anyway — churches shut, light goes flat, and the stones radiate heat like a pizza oven. There's a reason this culture invented the nap.</p>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="outdoors">
         <span class="time">16:30</span>
         <h4>Walk up to San Miniato al Monte <span class="rate">▲▲▲</span></h4>
         <p>Don't take the bus. The walk <em>is</em> the experience. Cross at the <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ponte+alle+Grazie+Firenze" target="_blank" rel="noopener noreferrer">Ponte alle Grazie</a>, turn left along Via di San Niccolò, pass through the <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Porta+San+Miniato+Firenze" target="_blank" rel="noopener noreferrer">Porta San Miniato</a> — a surviving 14th-century city gate — then climb Via del Monte alle Croci and the stone staircase behind it. Figure 40 minutes and about 360 feet of climb, most of it shaded by late afternoon.</p>
@@ -658,7 +694,7 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         <div class="tags"><span class="tag t-walk">40-min climb</span><span class="tag t-free">Free</span></div>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="sights">
         <span class="time">17:30</span>
         <h4>Vespers — Gregorian chant, sung by monks <span class="rate">▲▲▲</span></h4>
         <p><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Basilica+di+San+Miniato+al+Monte+Firenze" target="_blank" rel="noopener noreferrer">San Miniato al Monte</a> is the oldest and strangest church in Florence, begun in 1018. Its green-and-white marble front is the building Brunelleschi and Alberti stood and stared at — so geometrically perfect that Renaissance architects assumed it must be ancient Roman work. The floor is inlaid with zodiac panels. Spinello Aretino frescoed the sacristy top to bottom. Luca della Robbia glazed a ceiling here in 1466.</p>
@@ -667,7 +703,7 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         <div class="tags"><span class="tag t-free">Free</span><span class="tag t-book">No booking</span><span class="tag t-cost">45 min</span></div>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="sights">
         <span class="time">18:30</span>
         <h4>The Porte Sante cemetery <span class="rate">▲▲</span></h4>
         <p>Behind the basilica, built into the fortifications Michelangelo threw up in 1529 when the Emperor's army came to crush the Republic. He wrapped the bell tower in mattresses of wool to soak up cannon fire — a sculptor moonlighting as a military engineer, and rather good at it.</p>
@@ -675,7 +711,7 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         <div class="tags"><span class="tag t-free">Free</span></div>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="outdoors">
         <span class="time">19:48</span>
         <h4>Sunset from the steps — <em>not</em> from the Piazzale</h4>
         <p>Worth being clear about this, because you've done the Piazzale plenty: you are not going back to it. <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Piazzale+Michelangelo+Firenze" target="_blank" rel="noopener noreferrer">Piazzale Michelangelo</a> is a hundred yards <em>below</em> you and a hundred feet down. From up here you're looking over the top of it — you can watch several hundred people packed shoulder to shoulder taking the identical photograph while you sit on the steps of an 11th-century basilica with a glass from the monks' shop and nobody within thirty feet.</p>
@@ -687,7 +723,7 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         </div>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="meals">
         <span class="time">20:30</span>
         <h4>Dinner in San Niccolò, on the way down</h4>
         <p><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Zeb+Via+San+Miniato+Firenze" target="_blank" rel="noopener noreferrer">Zeb</a></b> (Via San Miniato 2r) is a former corner grocery with about a dozen stools at a counter, run by a mother and son. You sit facing the kitchen and eat handmade pasta while they cook it two feet away. Tiny, wonderful, and you must book. Or <b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Osteria+Antica+Mescita+San+Niccolo+Firenze" target="_blank" rel="noopener noreferrer">Osteria Antica Mescita San Niccolò</a></b> next to the church, part of it built into an old chapel, cheerful and half the fuss.</p>
@@ -721,20 +757,20 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
     <p class="photocap">Florence from the hills. (The wisteria is an April performance; in September you get the olives and the light.)</p>
 
     <div class="tl">
-      <div class="ev soft">
+      <div class="ev soft" data-cat="rest">
         <span class="time">04:30</span>
         <h4>The alarm</h4>
         <p>Yes, on a wedding day. Coffee is waiting in the van and you will sleep this afternoon — I've built the whole day around making that possible.</p>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="travel outdoors">
         <span class="time">05:00</span>
         <h4>Pickup for the balloon</h4>
         <p>They collect from central Florence and drive out to the launch field in the Chianti. Coffee and a cornetto happen on the way, and nobody expects conversation at that hour.</p>
         <div class="tags"><span class="tag t-book">Book now</span><span class="tag t-move">Hotel pickup</span></div>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="outdoors">
         <span class="time">06:45</span>
         <h4>Sunrise over the vineyards <span class="rate">▲▲▲</span></h4>
         <p>About an hour aloft, lifting off just as the light comes up. And your timing is lucky: early September is <em>vendemmia</em>, the grape harvest. From a thousand feet you'll watch picking crews working down the rows, tractors trailing dust along the white gravel roads, and mist still lying in the folds between Greve and Panzano before the sun burns it off.</p>
@@ -744,36 +780,36 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         <div class="tags"><span class="tag t-book">Book today</span><span class="tag t-cost">~€280 pp</span></div>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="meals outdoors">
         <span class="time">08:00</span>
         <h4>Landing, prosecco, farm breakfast</h4>
         <p>The chase van finds you in whatever field you came down in. Eggs, bread, honey, more coffee, and a certificate you will absolutely keep.</p>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="travel">
         <span class="time">11:00</span>
         <h4>Back in Florence</h4>
         <p>Six hours before the car. This is the reason the balloon works on a wedding day instead of wrecking it.</p>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="meals">
         <span class="time">11:30</span>
         <h4>Something light and cold</h4>
         <p>Nobody has ever been glad they ordered the bistecca at noon on a wedding day. A plate of pasta near the apartment, a glass of water for every glass of wine, and home.</p>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="rest">
         <span class="time">12:30 – 15:00</span>
         <h4>Sleep. This one is not optional.</h4>
         <p>You've been up since 4:30 and the dancing won't start until 22:00. Two hours flat on your back with the shutters closed is the difference between being at that wedding and merely attending it. The Italians have known this for centuries and built an entire national schedule around it.</p>
       </div>
-<div class="ev">
+<div class="ev" data-cat="rest">
         <span class="time">15:00 – 16:45</span>
         <h4>Get ready</h4>
         <p>Cash for the day. Phones and a battery pack fully charged — you'll be shooting photos all night. Steam the suit by hanging it in the bathroom while the shower runs. And pack the overnight bag for the B&amp;B <em>now</em>, not at 16:55.</p>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="travel fixed">
         <span class="time">17:00</span>
         <h4>Car departs for Corniola</h4>
         <p><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Fattoria+e+Villa+di+Corniola+Via+di+Corniola+88+Empoli" target="_blank" rel="noopener noreferrer">Fattoria e Villa di Corniola</a></b>, Via di Corniola 88, 50053 Empoli — an organic farm and restored manor house in the hills above Empoli, about 28 miles west of Florence. <a class="tix" href="http://www.fattoriadicorniola.com/" target="_blank" rel="noopener noreferrer">fattoriadicorniola.com</a></p>
@@ -781,13 +817,13 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         <div class="tags"><span class="tag t-move">Private car</span><span class="tag t-cost">~50 min + buffer</span></div>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="fixed">
         <span class="time">19:00</span>
         <h4>The wedding</h4>
         <p>Sunset is at 19:46, which means the ceremony runs straight into golden hour. Excellent news for whoever's holding the camera.</p>
       </div>
 
-      <div class="ev soft">
+      <div class="ev soft" data-cat="rest">
         <span class="time">Late</span>
         <h4>Bed &amp; Breakfast Borgo San Giusto</h4>
         <p>In the hills at <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Borgo+San+Giusto+Via+Salaiola+151+Empoli" target="_blank" rel="noopener noreferrer">Via Salaiola 151, Empoli</a> — about 15 minutes from Corniola, and just over a mile from Empoli's train station. There's a pool and a restaurant.</p>
@@ -904,13 +940,13 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
     <p class="photocap">Sunset through the arches of the Ponte Vecchio — give or take, the view from a kayak.</p>
 
     <div class="tl">
-      <div class="ev soft">
+      <div class="ev soft" data-cat="meals">
         <span class="time">08:30</span>
         <h4>Breakfast at Borgo San Giusto, slowly</h4>
         <p>Wedding hangover is a legitimate travel condition and I've never known a cure but time. There's a pool here if the answer to "shall we go?" is "not quite yet."</p>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="travel">
         <span class="time">10:00</span>
         <h4>Getting over to Vinci</h4>
         <p>About 20 minutes by taxi from the B&amp;B. Have them book it the night before — rural Tuscan taxis do not simply materialize when you want one. The thrifty alternative is city bus line 49 (Empoli Stazione – Sovigliana – Crocifisso – Vinci), roughly 25–30 minutes.</p>
@@ -918,7 +954,7 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         <div class="tags"><span class="tag t-move">Taxi or bus 49</span><span class="tag t-cost">25 min</span></div>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="sights">
         <span class="time">10:45</span>
         <h4>Museo Leonardiano <span class="rate">▲▲▲</span></h4>
         <p>Housed in the <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Museo+Leonardiano+Vinci" target="_blank" rel="noopener noreferrer">Castello dei Conti Guidi</a>, a medieval castle on top of a hill town of about 500 people, filled with working wooden models built straight from the codices — flying machines, the bicycle chain, pile drivers, a tank.</p>
@@ -928,7 +964,7 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         <div class="tags"><span class="tag t-cost">~€11</span><span class="tag t-free">Church free</span></div>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="outdoors sights">
         <span class="time">12:00</span>
         <h4>Walk the Strada Verde to Anchiano <span class="rate">▲▲▲</span></h4>
         <p>Trail 14 runs about a mile from town up to the <b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Casa+Natale+di+Leonardo+Anchiano+Vinci" target="_blank" rel="noopener noreferrer">Casa Natale di Leonardo</a></b>, the farmhouse where he was born. Unpaved, gentle gradients, through olive groves and vines the whole way, past the Mulino della Doccia — a mill that turns up in his notebooks.</p>
@@ -938,13 +974,13 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         <div class="tags"><span class="tag t-walk">1.1 miles · easy</span><span class="tag t-cost">Small entry fee</span></div>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="meals">
         <span class="time">13:15</span>
         <h4>Lunch in Vinci</h4>
         <p>Walk back down and eat in town. There are a couple of good osterie on and just off the main square — none of them famous, all of them honest. This is farm country: expect the local artichoke, wild boar, and oil pressed within a few miles of your plate. You'll eat better here for €25 than for €55 within sight of the Duomo.</p>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="travel">
         <span class="time">15:00</span>
         <h4>Back to Florence by train</h4>
         <p>Bus or taxi down to <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Stazione+di+Empoli" target="_blank" rel="noopener noreferrer">Empoli station</a> — collect your bags from the B&amp;B on the way, it's just over a mile out — then a Regionale train to <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Firenze+Santa+Maria+Novella+station" target="_blank" rel="noopener noreferrer">Firenze Santa Maria Novella</a>. About 30 minutes on the main Pisa–Florence line.</p>
@@ -952,12 +988,12 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         <div class="tags"><span class="tag t-move">Train · ~€5</span><span class="tag t-cost">30 min</span></div>
       </div>
 
-      <div class="ev soft">
+      <div class="ev soft" data-cat="rest">
         <span class="time">16:30</span>
         <h4>Home. Feet up.</h4>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="outdoors">
         <span class="time">18:15</span>
         <h4>Kayak the Arno, under the Ponte Vecchio <span class="rate">▲▲▲</span></h4>
         <p>Here's something almost nobody does. You're going to get into a boat essentially outside your own front door and paddle underneath a bridge built in 1345 — then look up at the Vasari Corridor running along the top of it, the covered passage Cosimo I had built in 1565 so his family could cross the city without touching the street or the people on it.</p>
@@ -966,7 +1002,7 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         <div class="tags"><span class="tag t-book">Book ahead</span><span class="tag t-cost">€60 pp</span><span class="tag t-walk">Meet at your door</span></div>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="meals">
         <span class="time">20:45</span>
         <h4>Saturday dinner</h4>
         <p><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Il+Santo+Bevitore+Via+di+Santo+Spirito+Firenze" target="_blank" rel="noopener noreferrer">Il Santo Bevitore</a></b> (Via di Santo Spirito 64r) is the dependable modern one — serious wine list, ten minutes over the bridge, never a bad meal.</p>
@@ -1003,19 +1039,19 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
     <p class="photocap">The Duomo&#39;s marble skin: the same green-and-white geometry that had Brunelleschi staring at San Miniato.</p>
 
     <div class="tl">
-      <div class="ev soft">
+      <div class="ev soft" data-cat="rest">
         <span class="time">07:15</span>
         <h4>Up, and gently</h4>
         <p>Two services back to back is a long stretch behind a camera. Eat something proper before you go — you won&#39;t get another real chance until two in the afternoon.</p>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="work">
         <span class="time">08:00</span>
         <h4>Coffee and load the gear</h4>
         <p>Batteries, cards, and a spare of each. If you shot Thursday on the same bodies, dump and reformat now rather than at 09:50 in a cinema lobby.</p>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="travel work">
         <span class="time">08:30</span>
         <h4>Across town to Novoli</h4>
         <p>The Life Church meets at <b>The Space Cinema</b>, Via di Novoli 2 — out in the northwest of the city, well beyond the tourist Florence you know. Take a taxi with the gear; it&#39;s about 15–20 minutes and €15–20, and it drops you at the door.</p>
@@ -1023,7 +1059,7 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         <div class="tags"><span class="tag t-move">Taxi ~€18</span><span class="tag t-cost">15–20 min</span></div>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="work">
         <span class="time">08:50</span>
         <h4>On site, with time to breathe</h4>
         <p>The church asks people to arrive 10–15 minutes early; you want a full hour. Walk the room, find your power, agree your positions, and get a level off the desk before anyone else is in the building.</p>
@@ -1036,38 +1072,38 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         </div>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="work fixed">
         <span class="time">10:00 – 11:30</span>
         <h4>Service one — in English</h4>
         <p>Roughly 80–90 minutes: worship, then the message.</p>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="work fixed">
         <span class="time">11:30 – 13:00</span>
         <h4>Service two — in Italian</h4>
         <p>Same again in the other language. Reset cards and batteries in the gap; it will be shorter than you want.</p>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="work">
         <span class="time">13:00</span>
         <h4>Wrap, and don&#39;t rush the room</h4>
         <p>Ten minutes of shaking hands after a shoot like this is worth more than the last B-roll shot. These are Marco and Tiina&#39;s people, and you&#39;ll want the goodwill when you&#39;re cutting the piece.</p>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="travel work">
         <span class="time">13:45</span>
         <h4>Taxi back, gear down</h4>
         <p>Straight to the apartment, cases in the corner, cards backed up to a second drive before you do anything else. Then change into something that isn&#39;t work clothes.</p>
         <div class="tags"><span class="tag t-move">Taxi ~€18</span></div>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="meals">
         <span class="time">14:30</span>
         <h4>A very late lunch, sitting down</h4>
         <p>You&#39;ve earned a long one. <b>Il Magazzino</b> on Piazza della Passera or anywhere in the Oltrarno with a table outside. Order more than you think you want — the next meal is a long way off and it&#39;s the good one.</p>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="sights">
         <span class="time">16:15</span>
         <h4>One last piece of hidden Florence — and today the timing is a gift</h4>
         <p>Here&#39;s the happy accident. Today is the first Sunday of the month, so every state museum in Italy is free — and every visitor in Florence stampedes the Uffizi and the Accademia. Which means the small state museums are also free, and still nearly empty. That is exactly the kind of arithmetic a traveller should exploit.</p>
@@ -1081,19 +1117,19 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         </div>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="gelato outdoors">
         <span class="time">17:45</span>
         <h4>Gelato and a last wander</h4>
         <p>Cross to <b>Gelateria Santa Trinita</b> over the bridge, then take the long way home along the lungarno. No agenda. This is the walk you&#39;ll be trying to remember in February.</p>
       </div>
 
-<div class="ev">
+<div class="ev" data-cat="meals">
         <span class="time">19:00</span>
         <h4>The last aperitivo</h4>
         <p>Find a chair outside. <b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Procacci+Via+Tornabuoni+Firenze" target="_blank" rel="noopener noreferrer">Procacci</a></b> on Via Tornabuoni has been serving tiny truffle rolls and a glass of Antinori white across a marble counter since 1885 — ten minutes, a few euros, and a hundred and forty years of practice. Or head over to Piazza della Passera for something with less starch in its collar.</p>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="meals">
         <span class="time">20:30</span>
         <h4>The last supper — splurge number two</h4>
         <p><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ristorante+Santa+Elisabetta+Firenze" target="_blank" rel="noopener noreferrer">Santa Elisabetta</a></b> sits inside a 6th-century Byzantine tower: three tables' worth of dining room, two Michelin stars, and Tuscan ingredients treated with total seriousness. Book far ahead. <b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ora+d%27Aria+Firenze" target="_blank" rel="noopener noreferrer">Ora d'Aria</a></b> is the slightly easier one-star option a few streets from you, and <b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Gucci+Osteria+Piazza+della+Signoria+Firenze" target="_blank" rel="noopener noreferrer">Gucci Osteria</a></b> on Piazza della Signoria gives you Massimo Bottura's take on Florence with the Palazzo Vecchio out the window.</p>
@@ -1101,7 +1137,7 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         <div class="tags"><span class="tag t-book">Reserve weeks ahead</span><span class="tag t-cost">€€€–€€€€</span></div>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="outdoors sights">
         <span class="time">23:00</span>
         <h4>The city, empty <span class="rate">▲▲▲</span></h4>
         <p>Don't go straight home. Walk over to <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Piazza+della+Signoria+Firenze" target="_blank" rel="noopener noreferrer">Piazza della Signoria</a> once the day-trippers have gone back to their buses. The <b>Loggia dei Lanzi</b> is an open-air sculpture gallery with no doors, no ticket, and no closing time — Cellini's <em>Perseus</em> holding up Medusa's head, cast in one terrifying pour in 1554 when Cellini threw his own pewter dinner plates into the furnace to keep the bronze flowing; Giambologna's <em>Rape of the Sabine</em>, spiraling up out of a single impossible block of marble. Floodlit, silent, and for one hour, entirely yours.</p>
@@ -1109,7 +1145,7 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         <div class="tags"><span class="tag t-free">Free</span><span class="tag t-walk">20-min loop</span></div>
       </div>
 
-      <div class="ev soft">
+      <div class="ev soft" data-cat="rest">
         <span class="time">00:30</span>
         <h4>Pack</h4>
         <p>Liquids out, boarding passes downloaded, taxi confirmed. Alarm at 3:50.</p>
@@ -1143,7 +1179,7 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
     <p class="photocap">The Arno after dark. Last look.</p>
 
     <div class="tl">
-      <div class="ev key">
+      <div class="ev key" data-cat="travel fixed">
         <span class="time">04:10</span>
         <h4>Taxi to Peretola</h4>
         <p>Book this on Sunday afternoon, not Monday morning. Florence taxis don't cruise for fares at 4:00 a.m., and there's essentially no ride-hailing here. Fifteen to twenty minutes at that hour.</p>
@@ -1151,24 +1187,24 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
         <div class="tags"><span class="tag t-book">Book Sunday</span><span class="tag t-move">~20 min</span></div>
       </div>
 
-      <div class="ev">
+      <div class="ev" data-cat="travel">
         <span class="time">04:35</span>
         <h4>At the airport</h4>
         <p>One small terminal. Bag drop for the first departures usually opens around two hours out. There's very little on the far side of security, so don't count on breakfast — grab something at the bar landside if you're hungry.</p>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="travel fixed">
         <span class="time">06:30</span>
         <h4>DL9521 → Amsterdam, arrives 08:40</h4>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="travel fixed">
         <span class="time">10:25</span>
         <h4>DL0073 → Atlanta, arrives 13:50</h4>
         <div class="info"><b>Be warned:</b> 1 hour 45 in Schiphol is a perfectly legal connection, but the passport-control queue before a US-bound gate can swallow 40 minutes on a Monday. Get off the first plane with purpose, follow the signs for non-Schengen departures, and walk right past the tulip shop.</div>
       </div>
 
-      <div class="ev key">
+      <div class="ev key" data-cat="travel fixed">
         <span class="time">15:31</span>
         <h4>DL1700 → Memphis, arrives 15:54</h4>
         <p>Home in time for dinner — and a whole different appreciation of your own kitchen.</p>
@@ -1271,21 +1307,21 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
   <p>Sunrise is 6:40, so by 10:30 the sun is high and hard. Your friends are shade, north light, and east-facing walls.</p>
 
   <div class="grid">
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Giardino+Bardini+Firenze" target="_blank" rel="noopener noreferrer">Giardino Bardini, upper terrace</a></b><div class="meta">Paid · permission needed for commercial work</div><p>Baroque staircase, the whole city behind them, cypress and pergola for shade. Loveliest backdrop on this list and the one most likely to need a written OK first.</p></div>
+    <div class="item" data-cat="work"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Giardino+Bardini+Firenze" target="_blank" rel="noopener noreferrer">Giardino Bardini, upper terrace</a></b><div class="meta">Paid · permission needed for commercial work</div><p>Baroque staircase, the whole city behind them, cypress and pergola for shade. Loveliest backdrop on this list and the one most likely to need a written OK first.</p></div>
 
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Piazzale+Michelangelo+Firenze" target="_blank" rel="noopener noreferrer">Piazzale Michelangelo, lower terraces</a></b><div class="meta">Free · public · busy</div><p>The postcard. Drop one level below the main terrace and you shed most of the crowd. Traffic noise is the real enemy here — lavs, not a shotgun mic.</p></div>
+    <div class="item" data-cat="work"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Piazzale+Michelangelo+Firenze" target="_blank" rel="noopener noreferrer">Piazzale Michelangelo, lower terraces</a></b><div class="meta">Free · public · busy</div><p>The postcard. Drop one level below the main terrace and you shed most of the crowd. Traffic noise is the real enemy here — lavs, not a shotgun mic.</p></div>
 
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Basilica+di+San+Miniato+al+Monte+Firenze" target="_blank" rel="noopener noreferrer">San Miniato al Monte forecourt</a></b><div class="meta">Free · quiet · ask the monks</div><p>Marble facade, the whole city below, and nearly silent at 10:30. A genuinely reverent setting for a pastoral interview. Stop by the monastery shop and ask before you set up.</p></div>
+    <div class="item" data-cat="work"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Basilica+di+San+Miniato+al+Monte+Firenze" target="_blank" rel="noopener noreferrer">San Miniato al Monte forecourt</a></b><div class="meta">Free · quiet · ask the monks</div><p>Marble facade, the whole city below, and nearly silent at 10:30. A genuinely reverent setting for a pastoral interview. Stop by the monastery shop and ask before you set up.</p></div>
 
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Forte+di+Belvedere+Firenze" target="_blank" rel="noopener noreferrer">Forte di Belvedere ramparts</a></b><div class="meta">Paid entry · check open days</div><p>Vast, empty, brick and sky. Hard sun with nowhere to hide, so bring a scrim — and be ready for wind up there.</p></div>
+    <div class="item" data-cat="work"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Forte+di+Belvedere+Firenze" target="_blank" rel="noopener noreferrer">Forte di Belvedere ramparts</a></b><div class="meta">Paid entry · check open days</div><p>Vast, empty, brick and sky. Hard sun with nowhere to hide, so bring a scrim — and be ready for wind up there.</p></div>
 
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Chiostro+Verde+Santa+Maria+Novella+Firenze" target="_blank" rel="noopener noreferrer">Cloister of Santa Maria Novella</a></b><div class="meta">Paid · permission needed</div><p>The Chiostro Verde: arcaded, shaded, with soft light bouncing off pale stone and frescoes behind. Near the station, easy load-in.</p></div>
+    <div class="item" data-cat="work"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Chiostro+Verde+Santa+Maria+Novella+Firenze" target="_blank" rel="noopener noreferrer">Cloister of Santa Maria Novella</a></b><div class="meta">Paid · permission needed</div><p>The Chiostro Verde: arcaded, shaded, with soft light bouncing off pale stone and frescoes behind. Near the station, easy load-in.</p></div>
 
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Piazza+Santo+Spirito+Firenze" target="_blank" rel="noopener noreferrer">Piazza Santo Spirito, morning</a></b><div class="meta">Free · public · market days</div><p>Real Oltrarno character, Brunelleschi's blank facade, plane trees for shade. There's a market most mornings — wonderful texture, terrible audio.</p></div>
+    <div class="item" data-cat="work"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Piazza+Santo+Spirito+Firenze" target="_blank" rel="noopener noreferrer">Piazza Santo Spirito, morning</a></b><div class="meta">Free · public · market days</div><p>Real Oltrarno character, Brunelleschi's blank facade, plane trees for shade. There's a market most mornings — wonderful texture, terrible audio.</p></div>
 
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ospedale+degli+Innocenti+Firenze" target="_blank" rel="noopener noreferrer">Loggia of the Ospedale degli Innocenti</a></b><div class="meta">Free to stand under · ticket for the terrace</div><p>The founding building of Renaissance architecture, 1419. Deep shade under the arcade all morning, with Della Robbia's swaddled babies overhead.</p></div>
+    <div class="item" data-cat="work"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ospedale+degli+Innocenti+Firenze" target="_blank" rel="noopener noreferrer">Loggia of the Ospedale degli Innocenti</a></b><div class="meta">Free to stand under · ticket for the terrace</div><p>The founding building of Renaissance architecture, 1419. Deep shade under the arcade all morning, with Della Robbia's swaddled babies overhead.</p></div>
 
-    <div class="item"><b>Your own stretch of the lungarno</b><div class="meta">Free · zero logistics</div><p>The Arno and the Ponte Vecchio, forty seconds from the apartment. At 10:30 the light comes from the south — put them facing the water with the bridge over a shoulder.</p></div>
+    <div class="item" data-cat="work"><b>Your own stretch of the lungarno</b><div class="meta">Free · zero logistics</div><p>The Arno and the Ponte Vecchio, forty seconds from the apartment. At 10:30 the light comes from the south — put them facing the water with the bridge over a shoulder.</p></div>
   </div>
 
   <div class="tip">
@@ -1304,16 +1340,16 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
 
   <h3>Hidden art, in town</h3>
   <div class="grid">
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Cenacolo+di+San+Salvi+Firenze" target="_blank" rel="noopener noreferrer">Cenacolo di San Salvi</a></b><div class="meta">Free · out past the ring road <span class="rate g">▲▲</span></div><p>Andrea del Sarto's <em>Last Supper</em>. When the Imperial army sacked the suburbs in 1529 they burned the convent — and stopped at this room because the painting was too beautiful to destroy. Barely visited today.</p></div>
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Museo+Horne+Firenze" target="_blank" rel="noopener noreferrer">Museo Horne</a></b><div class="meta">€ · five minutes from you <span class="rate g">▲▲</span></div><p>An Englishman's Renaissance house, left precisely as he furnished it in 1916. Giotto, Masaccio, and a kitchen full of 15th-century pots. You will be alone in it.</p></div>
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Casa+Rodolfo+Siviero+Firenze" target="_blank" rel="noopener noreferrer">Casa Rodolfo Siviero</a></b><div class="meta">Free · limited days <span class="rate g">▲</span></div><p>Home of the man who spent his life tracking down artworks the Nazis carried out of Italy — half spy, half curator. Left to the region with everything still in place.</p></div>
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Opificio+delle+Pietre+Dure+Firenze" target="_blank" rel="noopener noreferrer">Opificio delle Pietre Dure</a></b><div class="meta">€ · small <span class="rate g">▲</span></div><p>The Medici hard-stone workshop, still the world's leading art-restoration institute. Shows you exactly how those inlaid stone pictures were made — and the tools that did it.</p></div>
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Museo+di+San+Marco+Firenze" target="_blank" rel="noopener noreferrer">Museo di San Marco, at opening</a></b><div class="meta">€ · be there at 08:15 <span class="rate g">▲▲▲</span></div><p>Fra Angelico painted a private fresco into each monk's cell. Arrive at opening and you'll walk that upper corridor entirely alone — one of the quietest, most affecting hours in Florence. By 10:00 it's gone.</p></div>
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Museo+Stibbert+Firenze" target="_blank" rel="noopener noreferrer">Museo Stibbert</a></b><div class="meta">€ · in the hills north <span class="rate g">▲▲</span></div><p>A Victorian collector's magnificently mad house of arms and armor — including a full cavalcade of armored horsemen frozen mid-parade through a hall. Set in its own park. Nobody goes.</p></div>
+    <div class="item" data-cat="sights"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Cenacolo+di+San+Salvi+Firenze" target="_blank" rel="noopener noreferrer">Cenacolo di San Salvi</a></b><div class="meta">Free · out past the ring road <span class="rate g">▲▲</span></div><p>Andrea del Sarto's <em>Last Supper</em>. When the Imperial army sacked the suburbs in 1529 they burned the convent — and stopped at this room because the painting was too beautiful to destroy. Barely visited today.</p></div>
+    <div class="item" data-cat="sights"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Museo+Horne+Firenze" target="_blank" rel="noopener noreferrer">Museo Horne</a></b><div class="meta">€ · five minutes from you <span class="rate g">▲▲</span></div><p>An Englishman's Renaissance house, left precisely as he furnished it in 1916. Giotto, Masaccio, and a kitchen full of 15th-century pots. You will be alone in it.</p></div>
+    <div class="item" data-cat="sights"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Casa+Rodolfo+Siviero+Firenze" target="_blank" rel="noopener noreferrer">Casa Rodolfo Siviero</a></b><div class="meta">Free · limited days <span class="rate g">▲</span></div><p>Home of the man who spent his life tracking down artworks the Nazis carried out of Italy — half spy, half curator. Left to the region with everything still in place.</p></div>
+    <div class="item" data-cat="sights"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Opificio+delle+Pietre+Dure+Firenze" target="_blank" rel="noopener noreferrer">Opificio delle Pietre Dure</a></b><div class="meta">€ · small <span class="rate g">▲</span></div><p>The Medici hard-stone workshop, still the world's leading art-restoration institute. Shows you exactly how those inlaid stone pictures were made — and the tools that did it.</p></div>
+    <div class="item" data-cat="sights"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Museo+di+San+Marco+Firenze" target="_blank" rel="noopener noreferrer">Museo di San Marco, at opening</a></b><div class="meta">€ · be there at 08:15 <span class="rate g">▲▲▲</span></div><p>Fra Angelico painted a private fresco into each monk's cell. Arrive at opening and you'll walk that upper corridor entirely alone — one of the quietest, most affecting hours in Florence. By 10:00 it's gone.</p></div>
+    <div class="item" data-cat="sights"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Museo+Stibbert+Firenze" target="_blank" rel="noopener noreferrer">Museo Stibbert</a></b><div class="meta">€ · in the hills north <span class="rate g">▲▲</span></div><p>A Victorian collector's magnificently mad house of arms and armor — including a full cavalcade of armored horsemen frozen mid-parade through a hall. Set in its own park. Nobody goes.</p></div>
   </div>
 
-  <h3>Bigger days, if the plan shifts</h3>
-  <p>None of these fit the six days as they now stand — but if the balloon cancels and you end up with an unexpected free morning, or a plan falls through, these are the ones worth reaching for.</p>
+  <h3 data-cat="outdoors">Bigger days, if the plan shifts</h3>
+  <p data-cat="outdoors">None of these fit the six days as they now stand — but if the balloon cancels and you end up with an unexpected free morning, or a plan falls through, these are the ones worth reaching for.</p>
   <div class="card">
 
         <p><b>Vallombrosa.</b> <span class="rate">▲▲</span> Take a Regionale from Santa Maria Novella to <b>Sant'Ellero</b> (35–40 minutes toward Arezzo), then climb the old mule track and the bed of a long-abandoned cog railway up through a monumental silver-fir forest to the abbey at 3,100 feet. Founded in 1038. Milton came here, and it turns up in <em>Paradise Lost</em>. About 2,300 feet of ascent, two and a half to three hours up, and shaded the whole way. <b>Check the Sunday bus back down from Saltino before you commit</b>, or budget for a taxi.</p>
@@ -1324,10 +1360,10 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
 
   <h3>Legs and lungs</h3>
   <div class="grid">
-    <div class="item"><b>Anello del Rinascimento</b><div class="meta">Free · pick a segment</div><p>A long-distance trail that rings the city through the hills. You needn't walk the whole thing — bus out and walk one section back into town.</p></div>
-    <div class="item"><b>The Bardini &amp; Belvedere ladder</b><div class="meta">€ · 2 hours</div><p>Up through the Giardino Bardini, out along the Costa San Giorgio, up the old city walls to Forte Belvedere, then down into the Oltrarno. Steep, shaded, and almost entirely within the medieval walls.</p></div>
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Piscina+Le+Pavoniere+Firenze" target="_blank" rel="noopener noreferrer">Le Pavoniere</a></b><div class="meta">€ · summer only</div><p>An outdoor pool under the trees in the Cascine park. If a day turns truly brutal, this is what Florentines do about it — and where they do it.</p></div>
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Torre+San+Niccolo+Firenze" target="_blank" rel="noopener noreferrer">Torre San Niccolò</a></b><div class="meta">€ · summer only, guided</div><p>The one city gate that kept its full original height. Guided climbs up the narrow internal stair in the summer months — check the current dates.</p></div>
+    <div class="item" data-cat="outdoors"><b>Anello del Rinascimento</b><div class="meta">Free · pick a segment</div><p>A long-distance trail that rings the city through the hills. You needn't walk the whole thing — bus out and walk one section back into town.</p></div>
+    <div class="item" data-cat="outdoors"><b>The Bardini &amp; Belvedere ladder</b><div class="meta">€ · 2 hours</div><p>Up through the Giardino Bardini, out along the Costa San Giorgio, up the old city walls to Forte Belvedere, then down into the Oltrarno. Steep, shaded, and almost entirely within the medieval walls.</p></div>
+    <div class="item" data-cat="outdoors"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Piscina+Le+Pavoniere+Firenze" target="_blank" rel="noopener noreferrer">Le Pavoniere</a></b><div class="meta">€ · summer only</div><p>An outdoor pool under the trees in the Cascine park. If a day turns truly brutal, this is what Florentines do about it — and where they do it.</p></div>
+    <div class="item" data-cat="outdoors"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Torre+San+Niccolo+Firenze" target="_blank" rel="noopener noreferrer">Torre San Niccolò</a></b><div class="meta">€ · summer only, guided</div><p>The one city gate that kept its full original height. Guided climbs up the narrow internal stair in the summer months — check the current dates.</p></div>
   </div>
 </section>
 
@@ -1339,20 +1375,20 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
 
   <h3>Right by home base</h3>
   <div class="grid">
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Buca+dell%27Orafo+Firenze" target="_blank" rel="noopener noreferrer">Buca dell'Orafo</a></b><div class="meta">Volta dei Girolami 28r · 2 min</div><p>Down the steps under an archway. Going since 1945 in the old goldsmiths' quarter. Small, old-school Florentine. Book it.</p></div>
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Trattoria+Cammillo+Firenze" target="_blank" rel="noopener noreferrer">Trattoria Cammillo</a></b><div class="meta">Borgo San Jacopo 57r · 5 min</div><p>Family-run since 1945, just over the bridge. Long menu, opinionated waiters, consistently excellent.</p></div>
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Procacci+Firenze" target="_blank" rel="noopener noreferrer">Procacci</a></b><div class="meta">Via Tornabuoni 64r · 6 min</div><p>1885. Truffle rolls and a glass of white, standing at the marble. A ten-minute pleasure, not an evening.</p></div>
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Hotel+Continentale+Firenze" target="_blank" rel="noopener noreferrer">La Terrazza, Continentale</a></b><div class="meta">Vicolo dell'Oro 6r · 1 min</div><p>Rooftop with the Ponte Vecchio below. Go early — it's small and everybody's figured it out.</p></div>
+    <div class="item" data-cat="meals"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Buca+dell%27Orafo+Firenze" target="_blank" rel="noopener noreferrer">Buca dell'Orafo</a></b><div class="meta">Volta dei Girolami 28r · 2 min</div><p>Down the steps under an archway. Going since 1945 in the old goldsmiths' quarter. Small, old-school Florentine. Book it.</p></div>
+    <div class="item" data-cat="meals"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Trattoria+Cammillo+Firenze" target="_blank" rel="noopener noreferrer">Trattoria Cammillo</a></b><div class="meta">Borgo San Jacopo 57r · 5 min</div><p>Family-run since 1945, just over the bridge. Long menu, opinionated waiters, consistently excellent.</p></div>
+    <div class="item" data-cat="meals"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Procacci+Firenze" target="_blank" rel="noopener noreferrer">Procacci</a></b><div class="meta">Via Tornabuoni 64r · 6 min</div><p>1885. Truffle rolls and a glass of white, standing at the marble. A ten-minute pleasure, not an evening.</p></div>
+    <div class="item" data-cat="meals"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Hotel+Continentale+Firenze" target="_blank" rel="noopener noreferrer">La Terrazza, Continentale</a></b><div class="meta">Vicolo dell'Oro 6r · 1 min</div><p>Rooftop with the Ponte Vecchio below. Go early — it's small and everybody's figured it out.</p></div>
   </div>
 
   <h3>Worth the walk</h3>
   <div class="grid">
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Trattoria+Sostanza+Firenze" target="_blank" rel="noopener noreferrer">Trattoria Sostanza</a></b><div class="meta">Via del Porcellana 25r · cash only</div><p>1869. Communal tables, eight of them. Order the butter chicken and the artichoke tortino. Book weeks ahead.</p></div>
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Zeb+Firenze" target="_blank" rel="noopener noreferrer">Zeb</a></b><div class="meta">Via San Miniato 2r · San Niccolò</div><p>A dozen stools facing an open kitchen. Mother and son. Book.</p></div>
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Il+Santo+Bevitore+Firenze" target="_blank" rel="noopener noreferrer">Il Santo Bevitore</a></b><div class="meta">Via di Santo Spirito 64r</div><p>The reliable modern Oltrarno choice. Serious wine list, never a misfire.</p></div>
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Il+Magazzino+Firenze" target="_blank" rel="noopener noreferrer">Il Magazzino</a></b><div class="meta">Piazza della Passera</div><p>Tripe and lampredotto treated as real cooking rather than a tourist stunt. Be brave once.</p></div>
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Mercato+di+Sant%27Ambrogio+Firenze" target="_blank" rel="noopener noreferrer">Mercato di Sant'Ambrogio</a></b><div class="meta">Mornings, closed Sunday</div><p>Where Florentines actually shop. Eat at the trattoria tucked inside. Not to be confused with the Mercato Centrale food court.</p></div>
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ristorante+Santa+Elisabetta+Firenze" target="_blank" rel="noopener noreferrer">Santa Elisabetta</a></b><div class="meta">Piazza Santa Elisabetta · ★★</div><p>Inside a Byzantine tower. Tiny room, enormous cooking. The splurge.</p></div>
+    <div class="item" data-cat="meals"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Trattoria+Sostanza+Firenze" target="_blank" rel="noopener noreferrer">Trattoria Sostanza</a></b><div class="meta">Via del Porcellana 25r · cash only</div><p>1869. Communal tables, eight of them. Order the butter chicken and the artichoke tortino. Book weeks ahead.</p></div>
+    <div class="item" data-cat="meals"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Zeb+Firenze" target="_blank" rel="noopener noreferrer">Zeb</a></b><div class="meta">Via San Miniato 2r · San Niccolò</div><p>A dozen stools facing an open kitchen. Mother and son. Book.</p></div>
+    <div class="item" data-cat="meals"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Il+Santo+Bevitore+Firenze" target="_blank" rel="noopener noreferrer">Il Santo Bevitore</a></b><div class="meta">Via di Santo Spirito 64r</div><p>The reliable modern Oltrarno choice. Serious wine list, never a misfire.</p></div>
+    <div class="item" data-cat="meals"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Il+Magazzino+Firenze" target="_blank" rel="noopener noreferrer">Il Magazzino</a></b><div class="meta">Piazza della Passera</div><p>Tripe and lampredotto treated as real cooking rather than a tourist stunt. Be brave once.</p></div>
+    <div class="item" data-cat="meals"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Mercato+di+Sant%27Ambrogio+Firenze" target="_blank" rel="noopener noreferrer">Mercato di Sant'Ambrogio</a></b><div class="meta">Mornings, closed Sunday</div><p>Where Florentines actually shop. Eat at the trattoria tucked inside. Not to be confused with the Mercato Centrale food court.</p></div>
+    <div class="item" data-cat="meals"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ristorante+Santa+Elisabetta+Firenze" target="_blank" rel="noopener noreferrer">Santa Elisabetta</a></b><div class="meta">Piazza Santa Elisabetta · ★★</div><p>Inside a Byzantine tower. Tiny room, enormous cooking. The splurge.</p></div>
   </div>
 
   <h3>Gelato — and how to avoid the bad stuff</h3>
@@ -1366,17 +1402,17 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
   </div>
 
   <div class="grid">
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Gelateria+Santa+Trinita+Firenze" target="_blank" rel="noopener noreferrer">Gelateria Santa Trinita</a></b><div class="meta">Piazza de' Frescobaldi · 4 min <span class="rate g">▲▲▲</span></div><p>Your closest good one — just over the Ponte Santa Trinita. Excellent <em>buontalenti</em>, and a black sesame that has no business being as good as it is. Get a cone and walk back over the bridge with it at dusk.</p></div>
+    <div class="item" data-cat="gelato"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Gelateria+Santa+Trinita+Firenze" target="_blank" rel="noopener noreferrer">Gelateria Santa Trinita</a></b><div class="meta">Piazza de' Frescobaldi · 4 min <span class="rate g">▲▲▲</span></div><p>Your closest good one — just over the Ponte Santa Trinita. Excellent <em>buontalenti</em>, and a black sesame that has no business being as good as it is. Get a cone and walk back over the bridge with it at dusk.</p></div>
 
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Perche+No+Via+dei+Tavolini+Firenze" target="_blank" rel="noopener noreferrer">Perché No!</a></b><div class="meta">Via dei Tavolini 19r · 5 min <span class="rate g">▲▲▲</span></div><p>Churning since 1939, which makes it about the oldest still going in the city. Made fresh every morning with real milk and whatever fruit is in season. The name means "Why not!" and it's the correct answer.</p></div>
+    <div class="item" data-cat="gelato"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Perche+No+Via+dei+Tavolini+Firenze" target="_blank" rel="noopener noreferrer">Perché No!</a></b><div class="meta">Via dei Tavolini 19r · 5 min <span class="rate g">▲▲▲</span></div><p>Churning since 1939, which makes it about the oldest still going in the city. Made fresh every morning with real milk and whatever fruit is in season. The name means "Why not!" and it's the correct answer.</p></div>
 
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Vivoli+Firenze" target="_blank" rel="noopener noreferrer">Vivoli</a></b><div class="meta">Via Isola delle Stinche 7r · 10 min <span class="rate g">▲▲</span></div><p>Over a century old and the name every guidebook prints — which usually makes me suspicious, but this one earns it. Cups only, no cones, and don't skip the <em>affogato</em>: a scoop drowned in hot espresso.</p></div>
+    <div class="item" data-cat="gelato"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Vivoli+Firenze" target="_blank" rel="noopener noreferrer">Vivoli</a></b><div class="meta">Via Isola delle Stinche 7r · 10 min <span class="rate g">▲▲</span></div><p>Over a century old and the name every guidebook prints — which usually makes me suspicious, but this one earns it. Cups only, no cones, and don't skip the <em>affogato</em>: a scoop drowned in hot espresso.</p></div>
 
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Gelateria+della+Passera+Firenze" target="_blank" rel="noopener noreferrer">Gelateria della Passera</a></b><div class="meta">Piazza della Passera · 8 min <span class="rate g">▲▲</span></div><p>Tiny place on the most charming little square in the Oltrarno. Small batches, short list, no theatrics. Pair it with dinner at Il Magazzino on the same square.</p></div>
+    <div class="item" data-cat="gelato"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Gelateria+della+Passera+Firenze" target="_blank" rel="noopener noreferrer">Gelateria della Passera</a></b><div class="meta">Piazza della Passera · 8 min <span class="rate g">▲▲</span></div><p>Tiny place on the most charming little square in the Oltrarno. Small batches, short list, no theatrics. Pair it with dinner at Il Magazzino on the same square.</p></div>
 
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Gelateria+Carabe+Via+Ricasoli+Firenze" target="_blank" rel="noopener noreferrer">Carabé</a></b><div class="meta">Via Ricasoli 60r · near the Accademia <span class="rate g">▲▲</span></div><p>Sicilian, and they mean it — the pistachio and almonds come up from Sicily. In September go for the <em>granita di mandorla</em>, almond granita, with a brioche. It's breakfast where they come from, and it should be everywhere.</p></div>
+    <div class="item" data-cat="gelato"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Gelateria+Carabe+Via+Ricasoli+Firenze" target="_blank" rel="noopener noreferrer">Carabé</a></b><div class="meta">Via Ricasoli 60r · near the Accademia <span class="rate g">▲▲</span></div><p>Sicilian, and they mean it — the pistachio and almonds come up from Sicily. In September go for the <em>granita di mandorla</em>, almond granita, with a brioche. It's breakfast where they come from, and it should be everywhere.</p></div>
 
-    <div class="item"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Gelateria+dei+Neri+Firenze" target="_blank" rel="noopener noreferrer">Gelateria dei Neri</a></b><div class="meta">Via dei Neri 9–11r · 7 min <span class="rate g">▲▲</span></div><p>On the street-food alley near Santa Croce, and the one to beat for chocolate. Convenient stop after coffee at Ditta Artigianale a few doors down.</p></div>
+    <div class="item" data-cat="gelato"><b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Gelateria+dei+Neri+Firenze" target="_blank" rel="noopener noreferrer">Gelateria dei Neri</a></b><div class="meta">Via dei Neri 9–11r · 7 min <span class="rate g">▲▲</span></div><p>On the street-food alley near Santa Croce, and the one to beat for chocolate. Convenient stop after coffee at Ditta Artigianale a few doors down.</p></div>
   </div>
 
   <div class="tip">
@@ -1432,9 +1468,13 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
   var nav = document.querySelector('.nav-inner');
 
   function spy(){
-    var y = window.scrollY + 140, best = 0;
+    var y = window.scrollY + 150, best = -1;
     for (var i=0;i<targets.length;i++){
-      if (targets[i] && targets[i].offsetTop <= y) best = i;
+      var t = targets[i];
+      if (t && t.offsetParent !== null && t.offsetTop <= y) best = i;
+    }
+    if (best < 0) for (var j=0;j<targets.length;j++){
+      if (targets[j] && targets[j].offsetParent !== null){ best = j; break; }
     }
     pills.forEach(function(p,i){
       var on = (i===best);
@@ -1460,6 +1500,99 @@ a.tix::after{content:"\00a0↗";font-size:.74em;opacity:.65}
     b.addEventListener('click', toggle);
     b.addEventListener('keydown', function(e){
       if(e.key===' '||e.key==='Enter'){ e.preventDefault(); toggle(); }
+    });
+  });
+
+
+  // ── activity filter ────────────────────────────────────
+  var active = new Set();
+  var chips  = Array.prototype.slice.call(document.querySelectorAll('.fchip'));
+  var fcount = document.querySelector('.fcount');
+  var tagged = Array.prototype.slice.call(document.querySelectorAll('[data-cat]'));
+  var dayEls = Array.prototype.slice.call(document.querySelectorAll('.day'));
+  var evTotal = document.querySelectorAll('.ev').length;
+
+  dayEls.forEach(function(d){
+    var tl = d.querySelector('.tl');
+    if(!tl) return;
+    var p = document.createElement('p');
+    p.className = 'emptyday is-hidden';
+    p.textContent = 'Nothing in this view today.';
+    tl.parentNode.insertBefore(p, tl.nextSibling);
+  });
+
+  function matches(el){
+    if(!active.size) return true;
+    var cats = (el.getAttribute('data-cat')||'').split(/\s+/);
+    for(var i=0;i<cats.length;i++) if(active.has(cats[i])) return true;
+    return false;
+  }
+
+  function applyFilter(){
+    var on = active.size > 0, shown = 0;
+
+    tagged.forEach(function(el){
+      var ok = matches(el);
+      el.classList.toggle('is-hidden', !ok);
+      if(ok && el.classList.contains('ev')) shown++;
+    });
+
+    document.querySelectorAll('.ev:not([data-cat])').forEach(function(el){
+      el.classList.toggle('is-hidden', on);
+    });
+
+    document.querySelectorAll('.day details').forEach(function(d){
+      d.classList.toggle('is-hidden', on);
+    });
+
+    document.querySelectorAll('.grid').forEach(function(g){
+      var any = !!g.querySelector('.item:not(.is-hidden)');
+      g.classList.toggle('is-hidden', !any);
+      var n = g.previousElementSibling;
+      while(n && n.tagName !== 'H3' && n.tagName !== 'H2'){
+        if(n.tagName === 'P' || n.classList.contains('tip')) n.classList.toggle('is-hidden', !any);
+        n = n.previousElementSibling;
+      }
+      if(n && n.tagName === 'H3') n.classList.toggle('is-hidden', !any);
+    });
+
+    ['shoot','swap','eat'].forEach(function(id){
+      var sec = document.getElementById(id);
+      if(!sec) return;
+      var any = !!sec.querySelector('[data-cat]:not(.is-hidden)');
+      sec.classList.toggle('is-hidden', on && !any);
+    });
+
+    dayEls.forEach(function(d){
+      var empty = d.querySelector('.emptyday');
+      if(empty) empty.classList.toggle('is-hidden', !(on && !d.querySelector('.ev:not(.is-hidden)')));
+    });
+
+    chips.forEach(function(c){
+      var k = c.getAttribute('data-f');
+      var isOn = k === 'all' ? !on : active.has(k);
+      c.classList.toggle('on', isOn);
+      c.setAttribute('aria-pressed', isOn ? 'true' : 'false');
+    });
+
+    pills.forEach(function(p,i){
+      var t = targets[i];
+      p.classList.toggle('muted', !!(t && t.offsetParent === null));
+    });
+
+    var lab = document.querySelector('.flabel');
+    lab.textContent = on ? shown + '/' + evTotal : 'Show';
+    lab.classList.toggle('counting', on);
+    spy();
+  }
+
+  chips.forEach(function(c){
+    c.addEventListener('click', function(){
+      var k = c.getAttribute('data-f');
+      if(k === 'all') active.clear();
+      else if(active.has(k)) active.delete(k);
+      else active.add(k);
+      applyFilter();
     });
   });
 
