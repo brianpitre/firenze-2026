@@ -420,8 +420,21 @@ html{scroll-padding-top:142px}
   .pill{flex:0 0 auto}
   .filter-inner{flex-wrap:wrap;overflow-x:visible;align-items:center;padding:10px 13px 14px;margin-top:0}
   .flabel{width:100%;margin:0 0 6px}
-  html{scroll-padding-top:68px}
-  .day{scroll-margin-top:60px}
+  /* the bar lives at the bottom of the viewport, panel opens upward */
+  .nav{
+    position:fixed;top:auto;bottom:0;left:0;right:0;
+    display:flex;flex-direction:column-reverse;
+    border-bottom:0;border-top:1px solid var(--rule);
+    box-shadow:0 -8px 24px -14px rgba(42,32,25,.5);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  .nav-panel{border-top:0;border-bottom:1px solid var(--rule)}
+  /* chevron points up when closed, down when open */
+  .navtoggle-ico{transform:translateY(1px) rotate(-135deg)}
+  .navtoggle[aria-expanded="true"] .navtoggle-ico{transform:translateY(-3px) rotate(45deg)}
+  body{padding-bottom:calc(56px + env(safe-area-inset-bottom,0px))}
+  html{scroll-padding-top:14px}
+  .day{scroll-margin-top:10px}
 }
 
 /* ── PHOTOGRAPHY ───────────────────────────────── */
@@ -622,9 +635,9 @@ html{scroll-padding-top:142px}
       <div class="ev key" data-cat="sights">
         <span class="time">4:45 PM</span>
         <h4>Palazzo Vecchio: the Secret Passages <span class="rate">▲▲▲</span></h4>
-        <p>The Secret Room fell through — so we go and see a different set of rooms nobody else is standing in, and this one is four minutes from your door instead of twelve.</p>
+        <p>Four minutes from your door, and a set of rooms almost nobody else is standing in.</p>
         <p>Palazzo Vecchio has a public face and a private one, and the guided <em>Percorsi Segreti</em> takes you into the private one. You climb the narrow staircase the <b>Duke of Athens</b> had cut into the wall in 1343 so he could flee a city that had come to despise him — he lasted ten months before Florence threw him out anyway. You stand in the <b>Studiolo of Francesco I</b>, a windowless jewel-box of a laboratory, every inch of it painted, where a Medici grand duke shut himself away to do alchemy and avoid governing. And you walk <em>above</em> the painted ceiling of the Salone dei Cinquecento, through Vasari&#39;s raw timber roof trusses in the dark — the engineering that holds up all that gold.</p>
-        <p>Same instinct as the Secret Room: the parts of Florence built to be unseen. Honestly, in some ways it&#39;s stranger.</p>
+        <p>This is the Florence that was built to be unseen — and it is stranger than anything on the public route.</p>
         <div class="info"><b>Percorsi Segreti, Museo di Palazzo Vecchio:</b> Piazza della Signoria. The guided route is about €4–8 per person <em>on top of</em> museum admission, and runs roughly 75 minutes in English. Small groups.<br><b>Wednesday is the right day for it:</b> Palazzo Vecchio is open 9:00 AM–7:00 PM Wed (ticket office closes at 6:00 PM) — but only until 2:00 PM on Thursdays, so this genuinely cannot go later in the week.<br>Book by phone or email rather than through a reseller: <b>+39 055 054 1450</b> · info@musefirenze.it · <a class="tix" href="https://ticketsmuseums.comune.fi.it/1_museo-di-palazzo-vecchio/" target="_blank" rel="noopener noreferrer">Official tickets</a> · <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Palazzo+Vecchio+Firenze" target="_blank" rel="noopener noreferrer">Map</a></div>
         <div class="wear"><b>Wear</b>Narrow stairs, low beams and an unlit roof void — flat shoes with grip, and nothing you mind brushing against six centuries of dust. It is warmer up in the trusses than you expect.</div>
         <div class="tags"><span class="tag t-book">Phone ahead</span><span class="tag t-cost">€ + admission</span><span class="tag t-walk">4-min walk</span></div>
@@ -682,10 +695,9 @@ html{scroll-padding-top:142px}
     <details>
       <summary>Three other ways to spend Wednesday evening</summary>
       <div class="body">
-        <p><b>The Medici Chapels anyway <span class="rate">▲▲▲</span></b> — €11, and worth remembering that the Secret Room was the bonus, not the main event. The New Sacristy upstairs is the masterpiece: Michelangelo's Medici tombs, with <em>Dawn</em> and <em>Dusk</em>, <em>Night</em> and <em>Day</em> draped over the sarcophagi looking less carved than poured. Not one of the four is at rest. He walked out of that room unfinished in 1534, moved to Rome, and never set foot in Florence again. Twelve minutes from your door. <a class="tix" href="https://bargellomusei.it/en/tickets/cappelle-medicee/" target="_blank" rel="noopener noreferrer">Tickets</a></p>
+        <p><b>The Medici Chapels <span class="rate">▲▲▲</span></b> — €11. The New Sacristy upstairs is the masterpiece: Michelangelo's Medici tombs, with <em>Dawn</em> and <em>Dusk</em>, <em>Night</em> and <em>Day</em> draped over the sarcophagi looking less carved than poured. Not one of the four is at rest. He walked out of that room unfinished in 1534, moved to Rome, and never set foot in Florence again. Twelve minutes from your door. <a class="tix" href="https://bargellomusei.it/en/tickets/cappelle-medicee/" target="_blank" rel="noopener noreferrer">Tickets</a></p>
         <div class="quote">"Sweet is sleep, and sweeter to be stone, while the harm and the shame endure. Not to see, not to feel, is my good fortune. So do not wake me — speak softly."<span>Michelangelo, replying in verse to a poem written in praise of his <em>Night</em></span></div>
         <p><b>Museo Ferragamo <span class="rate">▲▲</span></b> — the sleeper pick, and about ninety seconds from your front door. It fills the basement of <b>Palazzo Spini Feroni</b>, a 13th-century fortified palace on Piazza Santa Trinita that Salvatore Ferragamo bought outright in 1938. Inside: the shoes he made for Hollywood in the 1920s, and the wooden lasts he carved for Garbo, Monroe and Hepburn — each one a portrait of a foot. He studied anatomy at university specifically to work out why women's shoes hurt, then patented the answers. Open daily until 7:30 PM, so it absorbs a jet-lagged evening beautifully. €10, free over 65. <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Museo+Salvatore+Ferragamo+Firenze" target="_blank" rel="noopener noreferrer">Map</a></p>
-        <p><b>Or the Vasari Corridor gambit</b> — if the Corridor still nags at you, Wednesday is technically possible: a 4:00 PM corridor slot means entering the Uffizi at 2:00 PM, which is about forty-five minutes after you reach the apartment. You'd skip the three doorways and walk in still smelling of aeroplane. I wouldn't, on a jet-lagged first afternoon — but it is the only window besides Thursday, so it's your call, not mine.</p>
       </div>
     </details>
   </div>
@@ -821,12 +833,7 @@ html{scroll-padding-top:142px}
         <h4>Sunset from the steps — <em>not</em> from the Piazzale</h4>
         <p>Worth being clear about this, because you've done the Piazzale plenty: you are not going back to it. <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Piazzale+Michelangelo+Firenze" target="_blank" rel="noopener noreferrer">Piazzale Michelangelo</a> is a hundred yards <em>below</em> you and a hundred feet down. From up here you're looking over the top of it — you can watch several hundred people packed shoulder to shoulder taking the identical photograph while you sit on the steps of an 11th-century basilica with a glass from the monks' shop and nobody within thirty feet.</p>
         <p>Same city, higher shelf, entirely different evening. Stay exactly where you are.</p>
-        <div class="tip">
-          <h5>Two other ways to watch the sun go down</h5>
-          <p><b>Torre San Niccolò.</b> You'll walk right past it descending toward dinner. It's the one city gate that kept its full original height, and in summer they run accompanied climbs up the internal stair — small groups, about €6, departures every half hour. <b>Be warned:</b> the season typically runs late June to end of September with late-afternoon hours closing around 7:00 PM, so it's likely a <em>pre</em>-sunset climb rather than a sunset one, and the 2026 dates need confirming. Worth a phone call: +39 055 276 8224. <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Torre+San+Niccolo+Firenze" target="_blank" rel="noopener noreferrer">Map</a></p>
-          <p><b>I Renaioli.</b> The old flat-bottomed wooden boats the Arno sand-dredgers used, rowed standing up, running May through September. Six departures a day including <b>7:00 PM–8:00 PM and 8:00 PM–9:00 PM</b> — which in early September puts you on the water at exactly the right moment. It leaves from Lungarno Generale Diaz, three minutes from your door. Completely different from both the Piazzale and Saturday's kayak: you sit, somebody else rows, and the city slides past. <a class="tix" href="https://www.renaioli.it/en/gite/" target="_blank" rel="noopener noreferrer">renaioli.it</a> · +39 347 798 2356</p>
         </div>
-      </div>
 
       <div class="ev" data-cat="meals">
         <span class="time">8:30 PM</span>
@@ -862,7 +869,7 @@ html{scroll-padding-top:142px}
 
     <div class="correction">
       <b>Your call on this morning</b>
-      With the balloon off, Friday is open again — and free. The plan below is the Leonardo morning on Monte Ceceri, which is the best physical-plus-hidden-art combination anywhere near Florence and costs you two bus fares. You&#39;ve said you know Fiesole well, so read the honest note halfway down about what is and isn&#39;t new up there, and if it still reads as retreading, the <b>Certosa del Galluzzo</b> swap below is a part of the city you almost certainly haven&#39;t seen. A slow morning — market, coffee, packing without hurry — is also a perfectly respectable choice on a wedding day. There&#39;s no wrong answer and nothing is booked.
+      Friday morning is open, and free. The plan below is the Leonardo morning on Monte Ceceri, which is the best physical-plus-hidden-art combination anywhere near Florence and costs you two bus fares. You&#39;ve said you know Fiesole well, so read the honest note halfway down about what is and isn&#39;t new up there, and if it still reads as retreading, the <b>Certosa del Galluzzo</b> swap below is a part of the city you almost certainly haven&#39;t seen. A slow morning — market, coffee, packing without hurry — is also a perfectly respectable choice on a wedding day. There&#39;s no wrong answer and nothing is booked.
     </div>
 
     <p class="photocap">Florence from the Settignano side — olive terraces, cypresses, and the Duomo floating in the haze. Roughly what you walk down through late morning.</p>
@@ -1037,7 +1044,7 @@ html{scroll-padding-top:142px}
         <p class="day-date">Saturday · 5 September</p>
         <h3 class="day-title" style="margin:0">Vinci</h3>
         <p class="day-strap">You wake up in the Empolese hills — and Leonardo was born seven miles from your breakfast table. Go see the room.</p>
-        <div class="day-warn"><b>Hard stop</b>Hertz car back at Firenze Peretola by 12:30 PM. Kayak on the Arno at 6:15 PM — reserved.</div>
+        <div class="day-warn"><b>Hard stop</b>Hertz car back at Santa Maria Novella by 1:30 PM. Kayak on the Arno at 6:15 PM — reserved.</div>
       </div>
     </div>
 
@@ -1061,50 +1068,56 @@ html{scroll-padding-top:142px}
       <div class="ev key" data-cat="sights outdoors">
         <span class="time">9:15 AM</span>
         <h4>Anchiano first — the house he was born in <span class="rate">▲▲▲</span></h4>
-        <p>Deliberately the reverse of the old plan, because of the 12:30 PM deadline on the car. With wheels you can drive up to the <b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Casa+Natale+di+Leonardo+Anchiano+Vinci" target="_blank" rel="noopener noreferrer">Casa Natale di Leonardo</a></b> in about five minutes instead of walking the mile of Green Path 14 — though if you would rather have the walk than the museum, park in town and take the trail. It runs through olive groves the whole way, past the Mulino della Doccia, a mill that turns up in his notebooks.</p>
+        <p>Reversed from the usual order, and worth keeping that way — this is the one to see with the morning still fresh on you. With wheels you can drive up to the <b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Casa+Natale+di+Leonardo+Anchiano+Vinci" target="_blank" rel="noopener noreferrer">Casa Natale di Leonardo</a></b> in about five minutes instead of walking the mile of Green Path 14 — though if you would rather have the walk than the museum, park in town and take the trail. It runs through olive groves the whole way, past the Mulino della Doccia, a mill that turns up in his notebooks.</p>
         <p>The house itself is nearly empty: stone, a fireplace, a window. That is exactly the point. Stand at that window and you are looking at the precise landscape that produced the man — the folded hills, the haze, the way the far ridges go blue with distance. He invented a technique in painting for that effect. He got it from this window, as a boy, for free.</p>
         <p>Of all the places I could send you in Tuscany, this quiet farmhouse is the one you will still be thinking about in a year. That is why it goes first today.</p>
-        <div class="info"><b>Check both opening times tonight</b> — the birthplace and the museum in town keep separate hours and they shift seasonally: <a class="tix" href="https://museoleonardiano.it/en/plan-your-visit/opening-hours-and-tickets/" target="_blank" rel="noopener noreferrer">museoleonardiano.it</a>. <b>If nothing opens before 10:00 AM you have time for one, not both</b> — take Anchiano and walk the path. Combined tickets are the good value only if you are genuinely doing both.</div>
+        <div class="info"><b>Check both opening times tonight</b> — the birthplace and the museum in town keep separate hours and they shift seasonally: <a class="tix" href="https://museoleonardiano.it/en/plan-your-visit/opening-hours-and-tickets/" target="_blank" rel="noopener noreferrer">museoleonardiano.it</a>. You have room for both this morning, so the <b>combined ticket</b> is the good value. If the birthplace opens later than the museum, simply swap the order — nothing this morning is fragile.</div>
         <div class="wear"><b>Wear</b>Unpaved and sloping if you walk it — trainers, not sandals. Almost no shade up there: hat, sunglasses, and sunscreen on the back of your neck.</div>
         <div class="tags"><span class="tag t-walk">Drive 5 min · or walk 1.1 miles</span><span class="tag t-cost">Small entry fee</span></div>
       </div>
 
       <div class="ev" data-cat="sights">
-        <span class="time">10:30 AM</span>
-        <h4>Museo Leonardiano, if the clock allows <span class="rate">▲▲</span></h4>
+        <span class="time">10:45 AM</span>
+        <h4>Museo Leonardiano <span class="rate">▲▲▲</span></h4>
         <p>Back down into town and into the <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Museo+Leonardiano+Vinci" target="_blank" rel="noopener noreferrer">Castello dei Conti Guidi</a> — a medieval castle on top of a hill town of about 500 people, filled with working wooden models built straight from the codices: flying machines, the bicycle chain, pile drivers, a tank. The precise opposite of those crowded &quot;Leonardo experience&quot; halls back in Florence.</p>
-        <p>If you only get twenty minutes here, spend them on the models and climb the tower for the view over the olive terraces he actually grew up staring at. And on the way back to the car, put your head into the church of <b>Santa Croce</b> and find the font — he was baptised in it on 16 April 1452, the day after he was born, the illegitimate son of a notary and a woman called Caterina.</p>
+        <p>Give it an hour and climb the tower for the view over the olive terraces he actually grew up staring at. Then, on the way back to the car, put your head into the church of <b>Santa Croce</b> and find the font — he was baptised in it on 16 April 1452, the day after he was born, the illegitimate son of a notary and a woman called Caterina.</p>
         <div class="tags"><span class="tag t-cost">~€11</span><span class="tag t-free">Church free</span></div>
       </div>
 
+      <div class="ev" data-cat="meals">
+        <span class="time">11:45 AM</span>
+        <h4>Something quick in Vinci, if you want it</h4>
+        <p>There are a couple of honest osterie on and just off the main square — none famous, all of them decent. This is farm country: the local artichoke, wild boar, oil pressed within a few miles of the plate.</p>
+        <p>Entirely optional. You have a proper Florentine lunch waiting at two o&#39;clock and only an hour here, so this is a plate of pasta standing up rather than a sit-down.</p>
+        <div class="tags"><span class="tag t-cost">Optional</span></div>
+      </div>
+
       <div class="ev key" data-cat="travel fixed">
-        <span class="time">11:30 AM</span>
-        <h4>Leave Vinci for the airport — and mean it</h4>
-        <p>Roughly 45 minutes from Vinci down to <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Aeroporto+di+Firenze+Peretola" target="_blank" rel="noopener noreferrer">Firenze Peretola</a>, plus the usual business of finding where rental returns actually are. Leaving at 11:30 AM makes a 12:30 PM drop comfortable instead of exciting.</p>
-        <div class="info"><b>Do the fuel before you get there.</b> If the return is full-to-full, fill up in Vinci or Empoli — airport pumps are a small act of theft. Photograph the dashboard showing fuel and mileage at handover, and get an email or a signed slip confirming the car came back undamaged before you walk away from the desk.</div>
-        <div class="tags"><span class="tag t-move">~45 min</span><span class="tag t-book">Drop by 12:30 PM</span></div>
+        <span class="time">12:15 PM</span>
+        <h4>Leave Vinci for the station</h4>
+        <p>Reckon 50 minutes from Vinci down to <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Firenze+Santa+Maria+Novella+station" target="_blank" rel="noopener noreferrer">Santa Maria Novella</a>, plus the usual business of finding where the rental returns actually are. Leaving at 12:15 PM makes a 1:30 PM drop comfortable rather than exciting — and a Saturday lunchtime approach into Florence is not the moment to be cutting it fine.</p>
+        <div class="info"><b>Do the fuel before you get near the city.</b> If the return is full-to-full, fill up in Vinci or out on the superstrada — filling up inside Florence with fifteen minutes to spare is a bad five minutes. <b>Follow the signed route to the Hertz return and nothing else:</b> the station sits right against the edge of the <b>ZTL</b>, and this is the one moment on the whole trip where a wrong turn costs you a camera fine.</div>
+        <div class="tags"><span class="tag t-move">~50 min</span><span class="tag t-book">Drop by 1:30 PM</span></div>
       </div>
 
       <div class="ev key" data-cat="travel">
-        <span class="time">12:30 PM</span>
-        <h4>Car back to Hertz — then into town</h4>
-        <p>Done with it. From here it is your own two feet, but a word about the distance, because the map flatters it: the airport to Lungarno degli Acciaiuoli is a little over <b>three miles</b>. That is a solid hour on hot pavement in the middle of the day, along roads that are not built for walking, carrying an overnight bag.</p>
-        <p>The <b>T2 tram</b> leaves from directly outside the terminal and runs to <b>Unità</b> in about twenty minutes for €1.70, which puts you a twelve-minute walk from your own door. That is the move. Buy at the machine before you board and <b>validate on board</b> — the fines are real and &quot;I&#39;m a tourist&quot; has never once worked.</p>
-        <p>If you want the walk, save it for an evening when you are carrying nothing and the sun is going down.</p>
-        <div class="info"><b>T2 tram:</b> Aeroporto → Unità, about 20 minutes, roughly €1.70. <a class="tix" href="https://www.gestramvia.it/airport/?lang=en" target="_blank" rel="noopener noreferrer">Timetable</a></div>
-        <div class="tags"><span class="tag t-move">Tram · €1.70</span><span class="tag t-walk">12-min walk after</span></div>
+        <span class="time">1:30 PM</span>
+        <h4>Car back to Hertz, and walk home</h4>
+        <p>Done with it — and this is where the station drop earns its keep. Photograph the dashboard showing fuel and mileage at handover, get something in writing that the car came back undamaged, and then simply <b>walk</b>: it is twelve to fifteen minutes from Santa Maria Novella down to your own door, the same walk you did on Friday afternoon in the other direction.</p>
+        <p>No tram, no taxi, no transfer with the bags. You hand over a set of keys and you are home before two o&#39;clock.</p>
+        <div class="tags"><span class="tag t-walk">12–15 min</span><span class="tag t-book">Returned</span></div>
       </div>
 
       <div class="ev" data-cat="meals">
-        <span class="time">1:30 PM</span>
+        <span class="time">2:00 PM</span>
         <h4>Bags down, and a long lunch</h4>
-        <p>You have been up since eight and driven half of Tuscany. Sit down properly somewhere near the apartment — <b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Il+Magazzino+Piazza+della+Passera+Firenze" target="_blank" rel="noopener noreferrer">Il Magazzino</a></b> on Piazza della Passera, or anywhere in the Oltrarno with a table outside and no agenda attached to it.</p>
+        <p>You have been up since eight and driven half of Tuscany. Sit down properly — <b><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Il+Magazzino+Piazza+della+Passera+Firenze" target="_blank" rel="noopener noreferrer">Il Magazzino</a></b> on Piazza della Passera, or anywhere in the Oltrarno with a table outside and no agenda attached to it.</p>
         <p>This is the first genuinely unscheduled hour you have had since you landed. Take all of it.</p>
         <div class="wear"><b>Wear</b>Whatever you drove in. Nobody is looking.</div>
       </div>
 
       <div class="ev soft" data-cat="rest">
-        <span class="time">3:30 PM</span>
+        <span class="time">4:00 PM</span>
         <h4>Feet up before the river</h4>
         <p>An hour flat on your back with the shutters closed. The kayak is at 6:15 PM and you will enjoy it considerably more awake.</p>
       </div>
@@ -1275,12 +1288,10 @@ html{scroll-padding-top:142px}
       </div>
     </div>
     <details>
-      <summary>The other hidden-Florence options — and where they now stand</summary>
+      <summary>The one hidden-Florence room that didn&#39;t fit</summary>
       <div class="body">
-        <p>Filming Sunday morning costs you the window these three needed. Being straight with you about each rather than leaving them on the list to taunt you:</p>
+        <p>One casualty worth naming, rather than leaving it on a list to taunt you:</p>
         <p><b>Cenacolo di Sant&#39;Apollonia</b> and the <b>Chiostro dello Scalzo</b> are morning-only and open just a few days a week. With Thursday&#39;s shoot and Sunday&#39;s services both landing in the mornings, neither realistically fits this trip. Worth knowing they exist for next time — Castagno&#39;s <em>Last Supper</em> of 1447, with Judas alone on the near side of the table under a panel of blood-red marble, is one of the strangest pictures in the city, and it&#39;s free.</p>
-        <p><b>The Vasari Corridor</b> has exactly one window left: <b>Thursday afternoon</b>. It runs Tue–Sun with the last group out at 4:35 PM, and you enter the Uffizi two hours before your corridor slot. So: wrap the shoot at 1:00 PM, quick lunch, into the Uffizi around 1:30 PM, corridor around 3:00 PM, out into the Boboli by about 3:45 PM — which actually leaves you well placed to climb to San Miniato for 5:30 PM vespers. It makes Thursday a very full day with no rest in it. Your call, and no wrong answer. €47 pre-booked. <a class="tix" href="https://www.coopculture.it/en/products/corridoio-vasariano-entrance-ticket/" target="_blank" rel="noopener noreferrer">Book via CoopCulture</a></p>
-        <p><b>Palazzo Vecchio&#39;s secret passages</b> have moved to Wednesday evening, taking the slot the Secret Room vacated — and that was the only place they could go, because the museum closes at 2:00 PM on Thursdays. So the Corridor no longer has a cheaper rival for Thursday afternoon: it's the Corridor, or a quiet afternoon.</p>
       </div>
     </details>
   </div>
@@ -1353,23 +1364,13 @@ html{scroll-padding-top:142px}
   <ul class="check" id="checklist">
     <li><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><span class="txt">
       <b>Palazzo Vecchio — Secret Passages</b>
-      <small>Wed 2 Sept, ~4:45 PM, replacing the Secret Room. Roughly €4–8 each on top of museum admission, about 75 minutes, small groups in English. <b>Phone or email rather than booking through a reseller</b> — they mark it up several times over for the identical slot.<br><b>Wednesday only:</b> Palazzo Vecchio runs 9:00 AM–7:00 PM Wed but closes at 2:00 PM Thursday, so there is no later slot this trip.<br>+39 055 054 1450 · info@musefirenze.it · <a class="tix" href="https://ticketsmuseums.comune.fi.it/1_museo-di-palazzo-vecchio/" target="_blank" rel="noopener noreferrer">Official tickets</a></small>
+      <small>Wed 2 Sept, ~4:45 PM. Roughly €4–8 each on top of museum admission, about 75 minutes, small groups in English. <b>Phone or email rather than booking through a reseller</b> — they mark it up several times over for the identical slot.<br><b>Wednesday only:</b> Palazzo Vecchio runs 9:00 AM–7:00 PM Wed but closes at 2:00 PM Thursday, so there is no later slot this trip.<br>+39 055 054 1450 · info@musefirenze.it · <a class="tix" href="https://ticketsmuseums.comune.fi.it/1_museo-di-palazzo-vecchio/" target="_blank" rel="noopener noreferrer">Official tickets</a></small>
       <span class="lead" style="color:#2E5541">Phone this week · usually available days out</span></span></li>
-
-    <li><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><span class="txt">
-      <b>Michelangelo&#39;s Secret Room</b> <em>— the long shot</em>
-      <small>Sold out, as expected at this range. Worth one look a day for the next week anyway: the tickets are nominative and non-transferable, so cancellations get released back into the calendar rather than quietly resold. Your windows are Wed 2 Sept (seven slots, 9:00 AM–6:00 PM) and late Sat 5 Sept. If one appears, grab it and slide Palazzo Vecchio into the Ferragamo slot.<br><a class="tix" href="https://www.b-ticket.com/b-ticket/firenzemusei/" target="_blank" rel="noopener noreferrer">Check B-Ticket</a></small>
-      <span class="lead" style="color:#8A2E1C">Check daily · don&#39;t count on it</span></span></li>
 
     <li><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><span class="txt">
       <b>Sunset kayak on the Arno</b> <em>— done</em>
       <small><b>Reserved.</b> Sat 5 Sept, around 6:15 PM, €60 each, 90 minutes, meeting at the Ponte Vecchio. Nothing left to do but show up in something that can get wet — and reconfirm the departure time when you land, since sunset moves and they sometimes shift the slot by fifteen minutes.<br><a class="tix" href="https://www.t-rafting.com/en/escursione/kayaking-on-the-arno-in-florence-ponte-vecchio/" target="_blank" rel="noopener noreferrer">T-Rafting</a></small>
       <span class="lead" style="color:#2E5541">Booked · reconfirm the time</span></span></li>
-
-    <li><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><span class="txt">
-      <b>I Renaioli sunset row</b> <em>— optional</em>
-      <small>Traditional rowed Arno boat, 45 minutes, departing Lungarno Generale Diaz three minutes from your door. The 7:00 PM slot is the sunset one. Consider it for Wednesday evening in place of a rooftop, or Thursday after vespers. Boats hold 8 or 14, season ends 30 September.<br><a class="tix" href="https://www.renaioli.it/en/gite/" target="_blank" rel="noopener noreferrer">renaioli.it</a> · booking@renaioli.it · +39 347 798 2356</small>
-      <span class="lead" style="color:#2E5541">Comfortable · book a week out</span></span></li>
 
     <li><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><span class="txt">
       <b>Sunday&#39;s big dinner</b> <em>— done</em>
@@ -1380,16 +1381,6 @@ html{scroll-padding-top:142px}
       <b>Zeb</b> — Thursday dinner
       <small>A dozen counter stools on Via San Miniato, conveniently downhill from vespers. Call or email; they fill fast.</small>
       <span class="lead">Email today · 12 seats, be flexible on time</span></span></li>
-
-    <li><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><span class="txt">
-      <b>Vasari Corridor</b> <em>— optional</em>
-      <small>€47 pre-booked (€43 same day), Tue–Sun, first entry 10:15 AM and last exit 4:35 PM; you enter the Uffizi two hours before your slot. <b>Both windows have now closed</b> — Sunday you are filming until 1:00 PM, and Thursday afternoon is the drive back from Ferrone. Park it for next time. Book direct; resellers quote triple.<br><a class="tix" href="https://www.coopculture.it/en/products/corridoio-vasariano-entrance-ticket/" target="_blank" rel="noopener noreferrer">Book via CoopCulture</a> · <a class="tix" href="https://www.uffizi.it/en/corridoio-vasariano" target="_blank" rel="noopener noreferrer">Official info</a></small>
-      <span class="lead" style="color:#2E5541">Better odds than you'd think · book direct</span></span></li>
-
-    <li><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><span class="txt">
-      <b>Palazzo Vecchio secret passages</b> <em>— optional</em>
-      <small>Timed guided slots. Cheaper and easier to get than the Corridor, and arguably the stranger experience.<br><a class="tix" href="https://ticketsmuseums.comune.fi.it/1_museo-di-palazzo-vecchio/" target="_blank" rel="noopener noreferrer">Official tickets</a></small>
-      <span class="lead" style="color:#2E5541">Easy · usually available days out</span></span></li>
 
     <li><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><span class="txt">
       <b>Confirm the Sunday shoot with the church</b>
@@ -1403,7 +1394,7 @@ html{scroll-padding-top:142px}
 
     <li><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><span class="txt">
       <b>The Friday car — Hertz, 1:30 PM</b>
-      <small>Reserved at <b>Santa Maria Novella</b> for 1:30 PM Friday, dropped at <b>Firenze Peretola by 12:30 PM Saturday</b>. Bring both licences, both passports, the card the booking was made on, and an International Driving Permit if you have one.<br><b>Three things to settle before Friday:</b> who is driving home from the wedding (Italy&#39;s limit is 0.05%, and zero under three years&#39; licence); whether the fuel policy is full-to-full; and the fact that your own street is inside the <b>ZTL</b>, so the car never comes to the apartment door.</small>
+      <small>Reserved at <b>Santa Maria Novella</b> for 1:30 PM Friday and returned to the same desk by <b>1:30 PM Saturday</b> — twenty-four hours, station to station, and a fifteen-minute walk home at the end of it. Bring both licences, both passports, the card the booking was made on, and an International Driving Permit if you have one.<br><b>Three things to settle before Friday:</b> who is driving home from the wedding (Italy&#39;s limit is 0.05%, and zero under three years&#39; licence); whether the fuel policy is full-to-full; and the fact that your own street is inside the <b>ZTL</b>, so the car never comes to the apartment door.</small>
       <span class="lead">Booked · read the ZTL note</span></span></li>
 
     <li><span class="box" role="checkbox" tabindex="0" aria-checked="false"></span><span class="txt">
@@ -1611,7 +1602,7 @@ html{scroll-padding-top:142px}
     <tr><td>Wed dinner</td><td><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Braceria+All%2711+Firenze" target="_blank" rel="noopener noreferrer">Braceria All'11</a> · reservation 8:00 PM · meeting Solotech on the Ponte Santa Trinita at 7:30 PM</td></tr>
     <tr><td>Thu building</td><td><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Via+Maso+Finiguerra+24R+Firenze" target="_blank" rel="noopener noreferrer">Via Maso Finiguerra 24 R</a>, Firenze · with Marco, 9:00 AM · a couple of blocks from S.M.N.</td></tr>
     <tr><td>Thu interview</td><td>Marco &amp; Tiina Geraci&#39;s home — <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Via+di+Calosina+69+Ferrone+Impruneta" target="_blank" rel="noopener noreferrer">Via di Calosina 69, 50023 Ferrone, Impruneta</a> · ~30 min south by car</td></tr>
-    <tr><td>Rental car</td><td>Hertz — collect <b>Fri 1:30 PM</b> at Santa Maria Novella, return <b>Sat 12:30 PM</b> at Firenze Peretola. Licences, passports, booking card, IDP if you have one</td></tr>
+    <tr><td>Rental car</td><td>Hertz at Santa Maria Novella — collect <b>Fri 1:30 PM</b>, return <b>Sat 1:30 PM</b>, same desk. Licences, passports, booking card, IDP if you have one</td></tr>
     <tr><td>Sun dinner</td><td><a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Gucci+Osteria+Piazza+della+Signoria+Firenze" target="_blank" rel="noopener noreferrer">Gucci Osteria</a>, Piazza della Signoria 10 · reservation 8:30 PM</td></tr>
     <tr><td>Taxi</td><td>055 4242 · 055 4390 · appTaxi. No Uber to speak of. Always book ahead for early mornings.</td></tr>
     <tr><td>Airport</td><td>~20 min by taxi (flat fare ~€22–25 plus supplements) or the <a class="tix" href="https://www.gestramvia.it/airport/?lang=en" target="_blank" rel="noopener noreferrer">T2 tram</a> from Unità (~20 min, ~€1.70)</td></tr>
